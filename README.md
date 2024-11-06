@@ -1,33 +1,20 @@
-# Project title
+# SS004.10 - ĐỒ ÁN CUỐI KỲ
 
-# Project title 2
+# TRÒ CHƠI CON RẮN
 
-## Table of Contents
+## Thành Viên Nhóm
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+- **[Nguyễn Nhật Huy]** (Nhóm Trưởng)
+- [Lê Tấn Thành]
+- [Đặng Nguyễn Huy Hoàng]
+- [Lâm Đỗ Kiến Thức]
 
-## Installation
+![Alt text](githubflow.drawio.png)
 
-Step-by-step guide on how to get your project up and running.
+## Quy Trình Làm Việc
 
-## Usage
-
-Provide examples of how to use your project.
-
-## Features
-
-Feature 1
-Feature 2
-Feature 3
-
-## Contributing
-
-Guidelines for contributing to the project.
-
-## License
-
-Include a link to your license file.
+1. Pull từ main vào local (máy của bạn) trước để đảm bảo branch được cập nhật
+2. Chuyển sang branch cá nhân của bạn (ví dụ: huy)
+3. Thực hiện merge main vào develop trước khi làm việc để không bỏ sót thay đổi từ sản phẩm chính. Tuy nhiên giai đoạn này có thể xảy ra xung đột
+4. Add, Commit và Push các thay đổi trên branch cá nhân và chỉ sau khi hoàn thành mới merge ngược lại vào main để đảm bảo nhánh chính chỉ chứa các tính năng hoàn thiện.
+5. Push branch main lên GitHub để cập nhật repository chính.
