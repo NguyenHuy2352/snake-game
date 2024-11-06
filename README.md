@@ -21,3 +21,5 @@
 - Cần phải để ý trong bước 2 quá trình làm việc, bạn đã **push** nó lên đúng branch main hay không vì có khả năng push nhầm nó lên branch cá nhân của bản thân trên github. Tuy nhiên **push** nhầm cũng không sao
 
 ![Alt text](gitworkflow.drawio.png)
+
+- Khi bạn pull xuống, có khả năng xảy ra xung đột (conflict), khi đó bạn phải tự sửa rồi merge lại
