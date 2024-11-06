@@ -1,33 +1,61 @@
-# Project title
+# SS004.10 - ĐỒ ÁN CUỐI KỲ
 
-# Project title 2
+# TRÒ CHƠI CON RẮN
 
-## Table of Contents
+## Thành Viên Nhóm
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+- **[Nguyễn Nhật Huy]** (Nhóm Trưởng)
+- [Lê Tấn Thành]
+- [Đặng Nguyễn Huy Hoàng]
+- [Lâm Đỗ Kiến Thức]
 
-## Installation
+## Lưu Ý Cho Các Thành Viên
 
-Step-by-step guide on how to get your project up and running.
+### 2. Chi tiết hơn về Markdown
 
-## Usage
+#### 2.1. Tiêu đề (Heading)
 
-Provide examples of how to use your project.
+Sử dụng dấu `#` để tạo các tiêu đề với nhiều cấp bậc:
 
-## Features
+- `#` cho tiêu đề cấp 1
+- `##` cho tiêu đề cấp 2
+- `###` cho tiêu đề cấp 3
 
-Feature 1
-Feature 2
-Feature 3
+#### 2.2. In đậm, in nghiêng
 
-## Contributing
+- In đậm: `**text**` → **text**
+- In nghiêng: `*text*` → _text_
+- Vừa đậm vừa nghiêng: `***text***` → **_text_**
 
-Guidelines for contributing to the project.
+#### 2.3. Danh sách
 
-## License
+- Danh sách không thứ tự:
 
-Include a link to your license file.
+  ```markdown
+  - Item 1
+  - Item 2
+  - Item 3
+  ```
+
+- Danh sách có thứ tự:
+  ```markdown
+  1. First item
+  2. Second item
+  3. Third item
+  ```
+
+#### 2.4. Đoạn mã lệnh (Code Blocks)
+
+Sử dụng dấu 3 backticks ` ``` ` để tạo khối code:
+
+\```bash
+npm start
+\```
+
+#### 2.5. Chèn hình ảnh
+
+Để thêm hình ảnh vào README:
+
+```markdown
+![Alt text](https://example.com/image.png)
+```
