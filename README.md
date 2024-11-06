@@ -48,9 +48,15 @@ Sử dụng dấu `#` để tạo các tiêu đề với nhiều cấp bậc:
 
 Sử dụng dấu 3 backticks ` ``` ` để tạo khối code:
 
-\```bash
-npm start
-\```
+```bash
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  return 0;
+}
+```
 
 #### 2.5. Chèn hình ảnh
 
