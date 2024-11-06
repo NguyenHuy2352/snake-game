@@ -11,5 +11,10 @@
 
 ## Lưu Ý Cho Các Thành Viên
 
+### Quá trình làm việc
 
-- Chỉ nên làm việc trên branch của chính mình, sau đó push lên
+```markdown
+1. Đầu tiên vào branch **main** kiểm tra xem repository của mình đã được cập nhật mới bằng với trên github chưa:
+   - Nếu chưa thì **_pull_** nó xuống
+   - **_pull_** xong thì
+```
