@@ -60,16 +60,47 @@ public:
         if (Huong == 2) A[0].x = A[0].x - 1;
         if (Huong == 3) A[0].y = A[0].y - 1;
     }
+    bool KiemTraVaChamKhung() {
+        return (A[0].x <= MINX || A[0].x >= MAXX || A[0].y <= MINY || A[0].y >= MAXY);
+    }
+
+    bool KiemTraTuDam() {
+        if (DoDai <= 4) return false;
+        for (int i = 1; i < DoDai; i++) {
+            if (A[0].x == A[i].x && A[0].y == A[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
 };
 
-
+void VeKhung() {
+    for (int i = MINX; i <= MAXX; i++) {
+        gotoxy(i, MINY);
+        cout << "-";
+        gotoxy(i, MAXY);
+        cout << "-";
+    }
+    for (int j = MINY; j <= MAXY; j++) {
+        gotoxy(MINX, j);
+        cout << "|";
+        gotoxy(MAXX, j);
+        cout << "|";
+    }
+}
 
 int main() {
     CONRAN r;
     int Huong = 0;
     char t;
+    Point Qua;
+    srand((int)time(0));
+    Qua.x = rand() % (MAXX - MINX - 1) + MINX + 1;
+    Qua.y = rand() % (MAXY - MINY - 1) + MINY + 1;
     
-
+    system("cls");
+    VeKhung();
     while (true) {
         if (_kbhit()) {
             t = _getch();
@@ -82,6 +113,11 @@ int main() {
         r.Ve(Qua);
         gotoxy(0, MAXY + 2);
        
+        if (r.KiemTraVaChamKhung() || r.KiemTraTuDam()) {
+            gotoxy(0, MAXY + 4);
+            cout << "Game Over!" << endl;
+            return 0;
+        }
 
 
        
@@ -98,3 +134,5 @@ int main() {
         Sleep(300);
     }
 }
+
+
