@@ -60,6 +60,7 @@ public:
         if (Huong == 2) A[0].x = A[0].x - 1;
         if (Huong == 3) A[0].y = A[0].y - 1;
     }
+
     bool KiemTraVaChamKhung() {
         return (A[0].x <= MINX || A[0].x >= MAXX || A[0].y <= MINY || A[0].y >= MAXY);
     }
@@ -72,6 +73,19 @@ public:
             }
         }
         return false;
+    }
+
+    void AnMoi(int Huong) {
+        this->DoDai++;
+        this->DiChuyen(Huong);
+    }
+
+    int GetHeadX() {
+        return A[0].x;
+    }
+
+    int GetHeadY() {
+        return A[0].y;
     }
 };
 
@@ -94,13 +108,15 @@ int main() {
     CONRAN r;
     int Huong = 0;
     char t;
+    int score = 0;
     Point Qua;
     srand((int)time(0));
     Qua.x = rand() % (MAXX - MINX - 1) + MINX + 1;
     Qua.y = rand() % (MAXY - MINY - 1) + MINY + 1;
-    
+
     system("cls");
     VeKhung();
+
     while (true) {
         if (_kbhit()) {
             t = _getch();
@@ -112,26 +128,27 @@ int main() {
 
         r.Ve(Qua);
         gotoxy(0, MAXY + 2);
-       
+        cout << "Score: " << score;
+
         if (r.KiemTraVaChamKhung() || r.KiemTraTuDam()) {
             gotoxy(0, MAXY + 4);
             cout << "Game Over!" << endl;
+            cout << "Final Score: " << score << endl;
             return 0;
         }
 
 
-       
         if (r.GetHeadX() == Qua.x && r.GetHeadY() == Qua.y) {
             r.AnMoi(Huong);
             Qua.x = rand() % (MAXX - MINX - 1) + MINX + 1;
             Qua.y = rand() % (MAXY - MINY - 1) + MINY + 1;
-              
+            score += 10;
         }
         else {
             r.DiChuyen(Huong);
         }
 
-        Sleep(300);
+        Sleep(300 - score);
     }
 }
 
