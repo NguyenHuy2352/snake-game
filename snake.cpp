@@ -118,13 +118,18 @@ int main() {
     VeKhung();
 
     while (true) {
-        if (_kbhit()) {
-            t = _getch();
-            if (t == 'a') Huong = 2;
-            if (t == 'w') Huong = 3;
-            if (t == 'd') Huong = 0;
-            if (t == 's') Huong = 1;
-        }
+       if (_kbhit()) {
+    t = _getch();
+    
+    if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) {
+        if (t == 'a') Huong = 2;  
+        if (t == 'd') Huong = 0;  
+    }
+    if ((t == 'w' || t == 's') && (Huong == 0 || Huong == 2)) {
+        if (t == 'w') Huong = 3;  
+        if (t == 's') Huong = 1; 
+    }
+}
 
         r.Ve(Qua);
         gotoxy(0, MAXY + 2);
