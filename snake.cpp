@@ -10,7 +10,7 @@
 #define MAXY 20
 
 using namespace std;
-
+// Hàm di chuyển con trỏ đến vị trí (column, line) trong console
 void gotoxy(int column, int line) {
     COORD coord;
     coord.X = column;
