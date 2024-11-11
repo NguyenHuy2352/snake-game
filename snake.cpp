@@ -116,7 +116,18 @@ int main() {
 
     system("cls");
     VeKhung();
-
+    // đừng xóa nha ae
+   /*while (true) {
+        if (_kbhit()) {
+            t = _getch();
+            if (t == 'a') Huong = 2;
+            if (t == 'w') Huong = 3;
+            if (t == 'd') Huong = 0;
+            if (t == 's') Huong = 1;
+        }
+    }*/
+    //Con rắn đi ngang theo hướng D mà  nhấn A(ngược hướng với D) phát đuổi đầu với đuôi luôn
+    /*
     while (true) {
        if (_kbhit()) {
     t = _getch();
@@ -129,8 +140,34 @@ int main() {
         if (t == 'w') Huong = 3;  
         if (t == 's') Huong = 1; 
     }
-}
-
+}*/
+    // sử dụng cách phím di chuyển bằng phím mũi tên và các phím W, A,S,D
+    while (true) {
+    if (_kbhit()) {
+        int t = _getch();
+        if (t == 224) { //  Điều khiển bằng phím mũi tên; Mã phím mũi tên bắt đầu bằng 224
+            t = _getch();
+            if ((t == 75 || t == 77) && (Huong == 1 || Huong == 3)) { // Trái hoặc phải
+                if (t == 75) Huong = 2;  // Mũi tên trái
+                if (t == 77) Huong = 0;  // Mũi tên phải
+            }
+            if ((t == 72 || t == 80) && (Huong == 0 || Huong == 2)) { //  Lên hoặc xuống
+                if (t == 72) Huong = 3;  // Mũi tên lên
+                if (t == 80) Huong = 1;  // Mũi tên xuống
+            }
+        }
+        else {
+            // Điều khiển bằng phím W, A, S, D
+            if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) { // Trái hoặc phải
+                if (t == 'a') Huong = 2;  // Phím A
+                if (t == 'd') Huong = 0;  // Phím D
+            }
+            if ((t == 'w' || t == 's') && (Huong == 0 || Huong == 2)) { // Lên hoặc xuống
+                if (t == 'w') Huong = 3;  // Phím W
+                if (t == 's') Huong = 1;  // Phím S
+            }
+        }
+    }
         r.Ve(Qua);
         gotoxy(0, MAXY + 2);
         cout << "Score: " << score;
