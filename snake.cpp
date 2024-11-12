@@ -17,32 +17,33 @@ void gotoxy(int column, int line) {
     coord.Y = line;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-
+// Cấu trúc biểu diễn một điểm trên màn hình
 struct Point {
     int x, y;
 };
-
+// Lớp CONRAN để quản lý con rắn
 class CONRAN {
 public:
-    Point A[100];
-    int DoDai;
-
+    Point A[100]; // Mảng các điểm của con rắn
+    int DoDai;  // Độ dài hiện tại của con rắn
+// Hàm khởi tạo ban đầu cho con rắn
     CONRAN() {
-        DoDai = 4;
+        DoDai = 4;    // Đặt độ dài mặc định là 4
+        // Đặt vị trí ban đầu của các phần con rắn
         A[0].x = 15; A[0].y = 10;
         A[1].x = 16; A[1].y = 10;
         A[2].x = 17; A[2].y = 10;
         A[3].x = 18; A[3].y = 10;
     }
-
+// Hàm vẽ con rắn và quả trên màn hình
     void Ve(Point Qua) {
         for (int i = 0; i < DoDai; i++) {
-            gotoxy(A[i].x, A[i].y);
+            gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
             if (i == 0)
-                cout << "o";
-            else cout << "=";
+                cout << "o";  // Đầu rắn
+            else cout << "=";  // Thân rắn
         }
-        gotoxy(Qua.x, Qua.y);
+        gotoxy(Qua.x, Qua.y);  // Vẽ quả
         cout << "*";
     }
 
