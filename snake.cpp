@@ -46,18 +46,20 @@ public:
         gotoxy(Qua.x, Qua.y);  // Vẽ quả
         cout << "*";
     }
-
+     // Xóa điểm cuối của con rắn (dùng khi di chuyển)
     void XoaDauCuoi() {
         gotoxy(A[DoDai - 1].x, A[DoDai - 1].y);
         cout << " ";
     }
-
+// Hàm di chuyển con rắn theo hướng chỉ định
     void DiChuyen(int Huong) {
         XoaDauCuoi();
+         // Dịch chuyển các điểm của con rắn lên một vị trí
         for (int i = DoDai - 1; i > 0; i--)
             A[i] = A[i - 1];
-        if (Huong == 0) A[0].x = A[0].x + 1;
-        if (Huong == 1) A[0].y = A[0].y + 1;
+         // Di chuyển đầu rắn theo hướng chỉ định
+        if (Huong == 0) A[0].x = A[0].x + 1; // Sang phải
+        if (Huong == 1) A[0].y = A[0].y + 1; 
         if (Huong == 2) A[0].x = A[0].x - 1;
         if (Huong == 3) A[0].y = A[0].y - 1;
     }
