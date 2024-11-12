@@ -35,17 +35,28 @@ public:
         A[2].x = 17; A[2].y = 10;
         A[3].x = 18; A[3].y = 10;
     }
-// Hàm vẽ con rắn và quả trên màn hình
-    void Ve(Point Qua) {
-        for (int i = 0; i < DoDai; i++) {
-            gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
-            if (i == 0)
-                cout << "o";  // Đầu rắn
-            else cout << "=";  // Thân rắn
-        }
-        gotoxy(Qua.x, Qua.y);  // Vẽ quả
-        cout << "*";
-    }
+ void setColor(int color) {
+     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+ }
+
+ // Hàm vẽ con rắn và quả trên màn hình
+ void Ve(Point Qua) {
+     for (int i = 0; i < DoDai; i++) {
+         gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
+         if (i == 0) {
+             setColor(14);        // Đặt màu vàng cho đầu rắn
+             cout << "0";         // Sử dụng ký tự "o" cho đầu rắn
+         }
+         else {
+             setColor(10);        // Đặt màu xanh lá cây cho thân rắn
+             cout << "o";         // Sử dụng ký tự "O" cho thân rắn
+         }
+     }
+     setColor(12);               // Đặt màu đỏ cho quả
+     gotoxy(Qua.x, Qua.y);       // Vẽ quả
+     cout << "*";
+     setColor(7);                // Trả lại màu mặc định
+ }
      // Xóa điểm cuối của con rắn (dùng khi di chuyển)
     void XoaDauCuoi() {
         gotoxy(A[DoDai - 1].x, A[DoDai - 1].y);
