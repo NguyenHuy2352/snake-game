@@ -59,17 +59,20 @@ public:
             A[i] = A[i - 1];
          // Di chuyển đầu rắn theo hướng chỉ định
         if (Huong == 0) A[0].x = A[0].x + 1; // Sang phải
-        if (Huong == 1) A[0].y = A[0].y + 1; 
-        if (Huong == 2) A[0].x = A[0].x - 1;
-        if (Huong == 3) A[0].y = A[0].y - 1;
+        if (Huong == 1) A[0].y = A[0].y + 1; // Xuống
+        if (Huong == 2) A[0].x = A[0].x - 1; // Sang trái
+        if (Huong == 3) A[0].y = A[0].y - 1; // Lên
     }
 
+    // Kiểm tra va chạm với khung viền
     bool KiemTraVaChamKhung() {
         return (A[0].x <= MINX || A[0].x >= MAXX || A[0].y <= MINY || A[0].y >= MAXY);
     }
 
+    // Kiểm tra va chạm với chính thân rắn
     bool KiemTraTuDam() {
-        if (DoDai <= 4) return false;
+        if (DoDai <= 4) return false; // Nếu rắn ngắn, không thể tự đâm
+        // Kiểm tra xem đầu rắn có đụng vào thân không
         for (int i = 1; i < DoDai; i++) {
             if (A[0].x == A[i].x && A[0].y == A[i].y) {
                 return true;
@@ -78,47 +81,51 @@ public:
         return false;
     }
 
+     // Hàm tăng độ dài của con rắn khi ăn mồi
     void AnMoi(int Huong) {
-        this->DoDai++;
-        this->DiChuyen(Huong);
+        this->DoDai++; // Tăng độ dài rắn
+        this->DiChuyen(Huong); // Di chuyển tiếp theo hướng
     }
 
+    // Lấy tọa độ x của đầu rắn
     int GetHeadX() {
         return A[0].x;
     }
 
+    // Lấy tọa độ y của đầu rắn
     int GetHeadY() {
         return A[0].y;
     }
 };
-
+// Vẽ khung giới hạn cho trò chơi
 void VeKhung() {
     for (int i = MINX; i <= MAXX; i++) {
-        gotoxy(i, MINY);
+        gotoxy(i, MINY); // Dòng trên
         cout << "-";
-        gotoxy(i, MAXY);
+        gotoxy(i, MAXY); // Dòng dưới
         cout << "-";
     }
     for (int j = MINY; j <= MAXY; j++) {
-        gotoxy(MINX, j);
+        gotoxy(MINX, j); // Cột trái
         cout << "|";
-        gotoxy(MAXX, j);
+        gotoxy(MAXX, j); // Cột phải
         cout << "|";
     }
 }
 
 int main() {
-    CONRAN r;
-    int Huong = 0;
+     CONRAN r; // Tạo đối tượng rắn
+    int Huong = 0; // Hướng di chuyển mặc định
     char t;
-    int score = 0;
-    Point Qua;
-    srand((int)time(0));
+    int score = 0; // Điểm số ban đầu
+    Point Qua; // Tọa độ quả mồi
+    srand((int)time(0)); // Thiết lập random
     Qua.x = rand() % (MAXX - MINX - 1) + MINX + 1;
     Qua.y = rand() % (MAXY - MINY - 1) + MINY + 1;
 
     system("cls");
-    VeKhung();
+    VeKhung(); // Vẽ khung trò chơi
+
     // đừng xóa nha ae
    /*while (true) {
         if (_kbhit()) {
