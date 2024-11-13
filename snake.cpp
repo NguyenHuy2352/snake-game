@@ -10,6 +10,7 @@
 #define MAXY 20
 
 using namespace std;
+
 // Hàm di chuyển con trỏ đến vị trí (column, line) trong console
 void gotoxy(int column, int line) {
     COORD coord;
@@ -17,16 +18,19 @@ void gotoxy(int column, int line) {
     coord.Y = line;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
 // Cấu trúc biểu diễn một điểm trên màn hình
 struct Point {
     int x, y;
 };
+
 // Lớp CONRAN để quản lý con rắn
 class CONRAN {
 public:
     Point A[100]; // Mảng các điểm của con rắn
     int DoDai;  // Độ dài hiện tại của con rắn
-// Hàm khởi tạo ban đầu cho con rắn
+
+    // Hàm khởi tạo ban đầu cho con rắn
     CONRAN() {
         DoDai = 4;    // Đặt độ dài mặc định là 4
         // Đặt vị trí ban đầu của các phần con rắn
@@ -35,40 +39,43 @@ public:
         A[2].x = 17; A[2].y = 10;
         A[3].x = 18; A[3].y = 10;
     }
- void setColor(int color) {
-     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
- }
 
- // Hàm vẽ con rắn và quả trên màn hình
- void Ve(Point Qua) {
-     for (int i = 0; i < DoDai; i++) {
-         gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
-         if (i == 0) {
-             setColor(14);        // Đặt màu vàng cho đầu rắn
-             cout << "0";         // Sử dụng ký tự "o" cho đầu rắn
-         }
-         else {
-             setColor(10);        // Đặt màu xanh lá cây cho thân rắn
-             cout << "o";         // Sử dụng ký tự "O" cho thân rắn
-         }
-     }
-     setColor(12);               // Đặt màu đỏ cho quả
-     gotoxy(Qua.x, Qua.y);       // Vẽ quả
-     cout << "*";
-     setColor(7);                // Trả lại màu mặc định
- }
-     // Xóa điểm cuối của con rắn (dùng khi di chuyển)
+    void setColor(int color) {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+    }
+
+    // Hàm vẽ con rắn và quả trên màn hình
+    void Ve(Point Qua) {
+        for (int i = 0; i < DoDai; i++) {
+            gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
+            if (i == 0) {
+                setColor(14);        // Đặt màu vàng cho đầu rắn
+                cout << "0";         // Sử dụng ký tự "o" cho đầu rắn
+            }
+            else {
+                setColor(10);        // Đặt màu xanh lá cây cho thân rắn
+                cout << "o";         // Sử dụng ký tự "O" cho thân rắn
+            }
+        }
+        setColor(12);               // Đặt màu đỏ cho quả
+        gotoxy(Qua.x, Qua.y);       // Vẽ quả
+        cout << "*";
+        setColor(7);                // Trả lại màu mặc định
+    }
+
+    // Xóa điểm cuối của con rắn (dùng khi di chuyển)
     void XoaDauCuoi() {
         gotoxy(A[DoDai - 1].x, A[DoDai - 1].y);
         cout << " ";
     }
-// Hàm di chuyển con rắn theo hướng chỉ định
+
+    // Hàm di chuyển con rắn theo hướng chỉ định
     void DiChuyen(int Huong) {
         XoaDauCuoi();
-         // Dịch chuyển các điểm của con rắn lên một vị trí
+        // Dịch chuyển các điểm của con rắn lên một vị trí
         for (int i = DoDai - 1; i > 0; i--)
             A[i] = A[i - 1];
-         // Di chuyển đầu rắn theo hướng chỉ định
+        // Di chuyển đầu rắn theo hướng chỉ định
         if (Huong == 0) A[0].x = A[0].x + 1; // Sang phải
         if (Huong == 1) A[0].y = A[0].y + 1; // Xuống
         if (Huong == 2) A[0].x = A[0].x - 1; // Sang trái
@@ -92,7 +99,7 @@ public:
         return false;
     }
 
-     // Hàm tăng độ dài của con rắn khi ăn mồi
+    // Hàm tăng độ dài của con rắn khi ăn mồi
     void AnMoi(int Huong) {
         this->DoDai++; // Tăng độ dài rắn
         this->DiChuyen(Huong); // Di chuyển tiếp theo hướng
@@ -108,6 +115,7 @@ public:
         return A[0].y;
     }
 };
+
 // Vẽ khung giới hạn cho trò chơi
 void VeKhung() {
     for (int i = MINX; i <= MAXX; i++) {
@@ -125,7 +133,7 @@ void VeKhung() {
 }
 
 int main() {
-     CONRAN r; // Tạo đối tượng rắn
+    CONRAN r; // Tạo đối tượng rắn
     int Huong = 0; // Hướng di chuyển mặc định
     char t;
     int score = 0; // Điểm số ban đầu
@@ -137,8 +145,9 @@ int main() {
     system("cls");
     VeKhung(); // Vẽ khung trò chơi
 
-    // đừng xóa nha ae
-   /*while (true) {
+   // đừng xóa nha ae
+   /*
+   while (true) {
         if (_kbhit()) {
             t = _getch();
             if (t == 'a') Huong = 2;
@@ -146,49 +155,54 @@ int main() {
             if (t == 'd') Huong = 0;
             if (t == 's') Huong = 1;
         }
-    }*/
+    }
+    */
+
     //Con rắn đi ngang theo hướng D mà  nhấn A(ngược hướng với D) phát đuổi đầu với đuôi luôn
     /*
     while (true) {
        if (_kbhit()) {
-    t = _getch();
-    
-    if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) {
-        if (t == 'a') Huong = 2;  
-        if (t == 'd') Huong = 0;  
-    }
-    if ((t == 'w' || t == 's') && (Huong == 0 || Huong == 2)) {
-        if (t == 'w') Huong = 3;  
-        if (t == 's') Huong = 1; 
-    }
-}*/
-    // sử dụng cách phím di chuyển bằng phím mũi tên và các phím W, A,S,D
-    while (true) {
-    if (_kbhit()) {
-        int t = _getch();
-        if (t == 224) { //  Điều khiển bằng phím mũi tên; Mã phím mũi tên bắt đầu bằng 224
             t = _getch();
-            if ((t == 75 || t == 77) && (Huong == 1 || Huong == 3)) { // Trái hoặc phải
-                if (t == 75) Huong = 2;  // Mũi tên trái
-                if (t == 77) Huong = 0;  // Mũi tên phải
+
+            if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) {
+                if (t == 'a') Huong = 2;
+                if (t == 'd') Huong = 0;
             }
-            if ((t == 72 || t == 80) && (Huong == 0 || Huong == 2)) { //  Lên hoặc xuống
-                if (t == 72) Huong = 3;  // Mũi tên lên
-                if (t == 80) Huong = 1;  // Mũi tên xuống
+            if ((t == 'w' || t == 's') && (Huong == 0 || Huong == 2)) {
+                if (t == 'w') Huong = 3;
+                if (t == 's') Huong = 1;
             }
-        }
-        else {
-            // Điều khiển bằng phím W, A, S, D
-            if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) { // Trái hoặc phải
-                if (t == 'a') Huong = 2;  // Phím A
-                if (t == 'd') Huong = 0;  // Phím D
-            }
-            if ((t == 'w' || t == 's') && (Huong == 0 || Huong == 2)) { // Lên hoặc xuống
-                if (t == 'w') Huong = 3;  // Phím W
-                if (t == 's') Huong = 1;  // Phím S
-            }
-        }
     }
+    */
+
+    // sử dụng cách phím di chuyển bằng phím mũi tên và các phím W,A,S,D
+    while (true) {
+        if (_kbhit()) {
+            int t = _getch();
+            if (t == 224) { //  Điều khiển bằng phím mũi tên; Mã phím mũi tên bắt đầu bằng 224
+                t = _getch();
+                if ((t == 75 || t == 77) && (Huong == 1 || Huong == 3)) { // Trái hoặc phải
+                    if (t == 75) Huong = 2;  // Mũi tên trái
+                    if (t == 77) Huong = 0;  // Mũi tên phải
+                }
+                if ((t == 72 || t == 80) && (Huong == 0 || Huong == 2)) { //  Lên hoặc xuống
+                    if (t == 72) Huong = 3;  // Mũi tên lên
+                    if (t == 80) Huong = 1;  // Mũi tên xuống
+                }
+            }
+            else {
+                // Điều khiển bằng phím W, A, S, D
+                if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) { // Trái hoặc phải
+                    if (t == 'a') Huong = 2;  // Phím A
+                    if (t == 'd') Huong = 0;  // Phím D
+                }
+                if ((t == 'w' || t == 's') && (Huong == 0 || Huong == 2)) { // Lên hoặc xuống
+                    if (t == 'w') Huong = 3;  // Phím W
+                    if (t == 's') Huong = 1;  // Phím S
+                }
+            }
+        }
+
         r.Ve(Qua);
         gotoxy(0, MAXY + 2);
         cout << "Score: " << score;
@@ -214,5 +228,3 @@ int main() {
         Sleep(300 - score);
     }
 }
-
-
