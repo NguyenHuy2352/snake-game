@@ -9,5 +9,9 @@
 - [Đặng Nguyễn Huy Hoàng]
 - [Lâm Đỗ Kiến Thức]
 
+## Gợi Ý Cải Thiện Code
+- Tăng tốc độ mỗi khi đạt 150 điểm
+- Tạo dòng chữ lưu lại điểm cao nhất trong lượt chơi đó Khi code được cải thiện thì sửa lại LaTeX
+
 ## Giảng Viên Hướng Dẫn
 - **Nguyễn Văn Toàn**
