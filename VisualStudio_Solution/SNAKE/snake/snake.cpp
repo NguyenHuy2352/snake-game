@@ -152,6 +152,7 @@ int main() {
     while (true) {
        if (_kbhit()) {
     t = _getch();
+<<<<<<< HEAD
 
     if ((t == 'a' || t == 'd') && (Huong == 1 || Huong == 3)) {
         if (t == 'a') Huong = 2;
