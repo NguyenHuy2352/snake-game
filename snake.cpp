@@ -225,6 +225,7 @@ int main() {
             r.DiChuyen(Huong);
         }
 
+        // Tăng tốc độ của rắn khi đạt mỗi 100 điểm
         Sleep(300 - score);
     }
 }
