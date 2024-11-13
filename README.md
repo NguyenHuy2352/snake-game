@@ -1,6 +1,6 @@
 # SS004.10 - ĐỒ ÁN CUỐI KỲ
 
-# TRÒ CHƠI CON RẮN
+# TRÒ CHƠI CON RẮN (Snake game)
 
 ## Thành Viên Nhóm
 
