@@ -50,11 +50,11 @@ public:
             gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
             if (i == 0) {
                 setColor(14);        // Đặt màu vàng cho đầu rắn
-                cout << "0";         // Sử dụng ký tự "o" cho đầu rắn
+                cout << "0";         // Sử dụng ký tự "0" cho đầu rắn
             }
             else {
                 setColor(10);        // Đặt màu xanh lá cây cho thân rắn
-                cout << "o";         // Sử dụng ký tự "O" cho thân rắn
+                cout << "o";         // Sử dụng ký tự "o" cho thân rắn
             }
         }
         setColor(12);               // Đặt màu đỏ cho quả
@@ -224,7 +224,7 @@ int main() {
         else {
             r.DiChuyen(Huong);
         }
-
+        // Tăng tốc độ của rắn khi đạt được điểm 
         Sleep(300 - score);
     }
 }
