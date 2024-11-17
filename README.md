@@ -9,7 +9,6 @@
 - [Đặng Nguyễn Huy Hoàng]
 - [Lâm Đỗ Kiến Thức]
 
-## Gợi ý cải thiện code
-- Tạo dòng chữ lưu lại điểm cao nhất trong lượt chơi đó
+-Test lại code nha
 
 **Khi code được cải thiện thì sửa lại LaTeX**
