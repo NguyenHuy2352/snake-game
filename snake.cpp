@@ -171,15 +171,15 @@ public:
 void VeKhung() {
     for (int i = MINX; i <= MAXX; i++) {
         gotoxy(i, MINY); // Dòng trên
-        cout << "-";
+        cout << "=";
         gotoxy(i, MAXY); // Dòng dưới
-        cout << "-";
+        cout << "=";
     }
     for (int j = MINY; j <= MAXY; j++) {
         gotoxy(MINX, j); // Cột trái
-        cout << "|";
+        cout << "||";
         gotoxy(MAXX, j); // Cột phải
-        cout << "|";
+        cout << "||";
     }
 }
 
