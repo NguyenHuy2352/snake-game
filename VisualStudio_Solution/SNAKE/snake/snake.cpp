@@ -203,10 +203,67 @@ void ShowCursor() {
     SetConsoleCursorInfo(hConsole, &cursorInfo); // Áp dụng thay đổi
 }
 
-int main() {
-_batDauLaiGame:
+void showMenu() {
+    cout << "===== MENU =====" << endl;
+    cout << "1. Play" << endl;
+    cout << "2. Exit" << endl;
+    cout << "3. Choose snake's speed" << endl;
+    cout << "Enter your choice: ";
+}
 
+void changeSnakeSpeed(int& speed) {
+    cout << "\nNew speed (1-3, 1: Default, 2: Normal, 3: Fast): ";
+    cin >> speed;
+    if (speed < 1) speed = 300;
+    if (speed > 3) speed = 100;
+    switch (speed) {
+    case 1: speed = 300; break;
+    case 2: speed = 200; break;
+    case 3: speed = 100; break;
+    }
+    cout << "Snake's speed changed succesfully!" << endl;
+}
+
+void playGame(int speed) {
+    // Logic chơi game ở đây (sử dụng biến speed để điều khiển tốc độ của game)
+    cout << "Start game with the speed of " << speed << "!" << endl;
+    // Thực hiện các bước chơi game...
+}
+
+int main() {
+    int choice;
+    int snakeSpeed = 300; // Tốc độ mặc định của rắn
+
+    while (true) {
+        showMenu();
+        choice = _getch() - '0'; // Đọc lựa chọn từ người chơi
+
+        switch (choice) {
+        case 1:
+            playGame(snakeSpeed);
+            break;
+        case 2:
+            cout << "Exiting..." << endl;
+            return 0;
+        case 3:
+            changeSnakeSpeed(snakeSpeed);
+            break;
+        default:
+            cout << "Your choice is not available!! Please choose again." << endl;
+        }
+        if (choice == 1)
+            break;
+    }
+
+    // Biến lưu giá trị snakeSpeed đã chọn
+    // snakeSpeed sẽ thay đổi khi chạy chương trình
+    // Vì thế cần một biến lưu lại giá trị snakeSpeed ban đầu
+    int initialSnakeSpeed = snakeSpeed;
+
+_batDauLaiGame:
     HideCursor(); // Ẩn con trỏ khi chơi game
+	snakeSpeed = initialSnakeSpeed;
+    
     // Vẽ và di chuyển rắn
 
     CONRAN r; // Tạo đối tượng rắn
@@ -311,7 +368,10 @@ _batDauLaiGame:
         }
 
         // Tăng tốc độ của rằn tùy theo điểm
-        Sleep(300 - score);
+        // Nếu snakeSpeed - score == 0 thì chương trình sẽ chạy không đúng
+        if (snakeSpeed == score)
+            snakeSpeed += 10;
+        Sleep(snakeSpeed - score);
     }
 
     ShowCursor(); // Hiển thị lại con trỏ khi cần

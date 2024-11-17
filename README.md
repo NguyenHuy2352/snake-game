@@ -10,9 +10,6 @@
 - [Lâm Đỗ Kiến Thức]
 
 ## Gợi ý cải thiện code
-- Tăng tốc độ mỗi khi đạt 150 điểm
-- Tạo màn hình trò chơi, hiển thị nội dung **CHƠI** hoặc **THOÁT**
-- Cho phép người chơi được chơi lại sau khi thua
 - Tạo dòng chữ lưu lại điểm cao nhất trong lượt chơi đó
 
 **Khi code được cải thiện thì sửa lại LaTeX**
