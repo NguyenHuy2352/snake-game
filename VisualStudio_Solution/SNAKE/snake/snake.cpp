@@ -80,11 +80,13 @@ public:
             }
             else {
                 setColor(10);        // Đặt màu xanh lá cây cho thân rắn
+                char _220 = char(220);
+                char _219 = char(219);
                 if (directions[i] == LEFT || directions[i] == RIGHT) {
-                    cout << char(220);  // Sử dụng ký tự có mã CCSID 437 là 220 cho thân rắn khi đi ngang
+                    cout << _220;  // Sử dụng ký tự có mã CCSID 437 là 220 cho thân rắn khi đi ngang
                 }
                 else {
-                    cout << char(219);  // Sử dụng ký tự có mã CCSID 437 là 219 cho thân rắn khi đi dọc
+                    cout << _219;  // Sử dụng ký tự có mã CCSID 437 là 219 cho thân rắn khi đi dọc
                 }
             }
         }
@@ -116,17 +118,18 @@ public:
         if (Huong == 2) A[0].x = A[0].x - 1, directions[0] = LEFT;; // Sang trái
         if (Huong == 3) A[0].y = A[0].y - 1, directions[0] = UP;; // Lên
 
-        if (previousHead == UP)
+        // Chỉnh directions[1] cho hợp lý
+        if (previousHead == UP) // Nếu mới chuyển hướng qua ngang khi đang đi lên
         {
             directions[1] = directions[0];
             previousHead = directions[0];
         }
-        else if ((previousHead == LEFT || previousHead == RIGHT) && directions[0] == UP)
+        else if ((previousHead == LEFT || previousHead == RIGHT) && directions[0] == UP) // Nếu mới chuyển hướng lên trên
         {
             directions[1] = directions[0];
             previousHead = directions[0];
         }
-        else
+        else // Chuyển hướng xuống/chuyển hướng qua ngang khi đang đi xuống => Không cần sửa đổi
             previousHead = directions[0];
     }
 
