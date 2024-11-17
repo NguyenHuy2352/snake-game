@@ -25,24 +25,35 @@ struct Point {
     int x, y;
 };
 
-// Hướng di chuyển của rắn (ngang, dọc)
+// Lưu hướng di chuyển của từng phần thân
 enum Direction { UP, DOWN, LEFT, RIGHT };
-Direction currentDirection;
+
+// Lưu lại hướng di chuyển của đầu rắn trước khi chuyển hướng
+// Vì có lỗi xảy ra khi chuyển hướng rắn lúc rắn đang đi lên hoặc đi xuống
+// dẫn đến hình ảnh rắn không được cập nhật đúng
+Direction previousHead;
 
 // Lớp CONRAN để quản lý con rắn
 class CONRAN {
 public:
     Point A[100]; // Mảng các điểm của con rắn
+    Direction directions[100]; // Mảng lưu hướng của từng phần rắn, hoạt động cùng với enum Direction
     int DoDai;  // Độ dài hiện tại của con rắn
 
     // Hàm khởi tạo ban đầu cho con rắn
     CONRAN() {
         DoDai = 4;    // Đặt độ dài mặc định là 4
         // Đặt vị trí ban đầu của các phần con rắn
-        A[0].x = 15; A[0].y = 10;
-        A[1].x = 16; A[1].y = 10;
-        A[2].x = 17; A[2].y = 10;
-        A[3].x = 18; A[3].y = 10;
+        A[0].x = 18; A[0].y = 10;
+        A[1].x = 17; A[1].y = 10;
+        A[2].x = 16; A[2].y = 10;
+        A[3].x = 15; A[3].y = 10;
+        // Đặt hướng ban đầu của đầu rắn
+        directions[0] = RIGHT;
+        directions[1] = RIGHT;
+        directions[2] = RIGHT;
+        directions[3] = RIGHT;
+        previousHead = directions[0];
     }
 
     // Hàm setColor thay đổi màu sắc của văn bản trong console.
@@ -58,16 +69,18 @@ public:
             gotoxy(A[i].x, A[i].y);  // Di chuyển con trỏ đến vị trí từng điểm của rắn
             if (i == 0) {
                 setColor(14);        // Đặt màu vàng cho đầu rắn
-                if (currentDirection == LEFT || currentDirection == RIGHT || currentDirection == UP) {
-                    cout << char(220);  // Sử dụng ký tự có mã CCSID 437 là 220 cho thân rắn khi đi ngang
+                char _220 = char(220);
+                char _223 = char(223);
+                if (directions[i] == LEFT || directions[i] == RIGHT || directions[i] == UP) {
+                    cout << _220;  // Sử dụng ký tự có mã CCSID 437 là 220 cho thân rắn khi đi ngang
                 }
                 else {
-                    cout << char(223);  // Sử dụng ký tự có mã CCSID 437 là 223 cho thân rắn khi đi dọc
+                    cout << _223;  // Sử dụng ký tự có mã CCSID 437 là 223 cho thân rắn khi đi dọc
                 }
             }
             else {
                 setColor(10);        // Đặt màu xanh lá cây cho thân rắn
-                if (currentDirection == LEFT || currentDirection == RIGHT) {
+                if (directions[i] == LEFT || directions[i] == RIGHT) {
                     cout << char(220);  // Sử dụng ký tự có mã CCSID 437 là 220 cho thân rắn khi đi ngang
                 }
                 else {
@@ -92,12 +105,29 @@ public:
         XoaDauCuoi();
         // Dịch chuyển các điểm của con rắn lên một vị trí
         for (int i = DoDai - 1; i > 0; i--)
+        {
             A[i] = A[i - 1];
+            directions[i] = directions[i - 1]; // Cập nhật hướng của mỗi phần thân
+        }
+
         // Di chuyển đầu rắn theo hướng chỉ định
-        if (Huong == 0) A[0].x = A[0].x + 1, currentDirection = RIGHT; // Sang phải
-        if (Huong == 1) A[0].y = A[0].y + 1, currentDirection = DOWN;; // Xuống
-        if (Huong == 2) A[0].x = A[0].x - 1, currentDirection = LEFT;; // Sang trái
-        if (Huong == 3) A[0].y = A[0].y - 1, currentDirection = UP;; // Lên
+        if (Huong == 0) A[0].x = A[0].x + 1, directions[0] = RIGHT; // Sang phải
+        if (Huong == 1) A[0].y = A[0].y + 1, directions[0] = DOWN;; // Xuống
+        if (Huong == 2) A[0].x = A[0].x - 1, directions[0] = LEFT;; // Sang trái
+        if (Huong == 3) A[0].y = A[0].y - 1, directions[0] = UP;; // Lên
+
+        if (previousHead == UP)
+        {
+            directions[1] = directions[0];
+            previousHead = directions[0];
+        }
+        else if ((previousHead == LEFT || previousHead == RIGHT) && directions[0] == UP)
+        {
+            directions[1] = directions[0];
+            previousHead = directions[0];
+        }
+        else
+            previousHead = directions[0];
     }
 
     // Kiểm tra va chạm với khung viền
@@ -278,7 +308,7 @@ _batDauLaiGame:
         }
 
         // Tăng tốc độ của rằn tùy theo điểm
-        Sleep(200 - score);
+        Sleep(300 - score);
     }
 
     ShowCursor(); // Hiển thị lại con trỏ khi cần
